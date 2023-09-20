@@ -1,4 +1,4 @@
-import { Document } from "mongoose";
+import { Document } from 'mongoose';
 
 export type userType = {
   name: string;
@@ -7,5 +7,5 @@ export type userType = {
   picUrl: string;
   address?: string;
   phoneNo: string;
-  role:"user" | "admin"
+  role: 'user' | 'admin';
 } & Document;
