@@ -1,4 +1,4 @@
-import mongoose, { Schema, model } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import { userType } from '../types/user.type';
 
 const userSchema = new Schema<userType>(
@@ -28,7 +28,7 @@ const userSchema = new Schema<userType>(
       type: String,
     },
     role: {
-      enum: ["user", 'admin'],
+      enum: ['user', 'admin'],
       default: 'user',
       required: true,
     },
