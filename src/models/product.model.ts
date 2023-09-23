@@ -1,7 +1,6 @@
 import mongoose, { Schema, model } from 'mongoose';
 import { productType } from '../types/product.type';
 
-
 const productSchema = new Schema<productType>(
   {
     title: {
@@ -26,11 +25,10 @@ const productSchema = new Schema<productType>(
       required: true,
     },
 
-
     order: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Booking',
+        ref: 'Order',
       },
     ],
   },

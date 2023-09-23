@@ -1,4 +1,5 @@
 import { Document } from 'mongoose';
+import { orderType } from './order.type';
 
 export type userType = {
   name: string;
@@ -7,5 +8,6 @@ export type userType = {
   picUrl: string;
   address?: string;
   phoneNo: string;
+  order:orderType[],
   role: 'user' | 'admin';
 } & Document;

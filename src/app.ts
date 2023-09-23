@@ -7,6 +7,10 @@ import { urlencoded } from 'body-parser';
 import hpp from 'hpp';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import userRouter from './routes/user.route';
+import productRouter from './routes/product.route';
+import orderRouter from './routes/order.route';
+import authRouter from './routes/auth.route';
 
 class App {
   private app: Application;
@@ -32,6 +36,11 @@ class App {
     this.app.get('/', (req: Request, res: Response) => {
       return res.status(200).json({ message: 'Welcome to noreStore-server😊' });
     });
+    // bypass Routes
+    this.app.use('/api/auth', authRouter);
+    this.app.use('api/users', userRouter);
+    this.app.use('api/products', productRouter);
+    this.app.use('api/orders', orderRouter);
   }
   private connectToTheDatabase(): void {
     const uri = process.env.MONGO_URI as string;
