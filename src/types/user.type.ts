@@ -7,7 +7,7 @@ export type userType = {
   password: string;
   picUrl: string;
   address?: string;
-  phoneNo: string;
-  order:orderType[],
+  phoneNo?: string;
+  order: orderType[];
   role: 'user' | 'admin';
 } & Document;

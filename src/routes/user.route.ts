@@ -1,16 +1,14 @@
-import express,{Router} from "express"
+import express, { Router } from 'express';
 
-
-const userRouter:Router = express.Router() 
+const userRouter: Router = express.Router();
 
 // get all users
-userRouter.get("/")
+userRouter.get('/');
 // get an user
-userRouter.get("/:id")
+userRouter.get('/:id');
 // update an user
-userRouter.put("/:id")
+userRouter.put('/:id');
 // delete an user
-userRouter.delete("/:id")
+userRouter.delete('/:id');
 
-
-export default userRouter
+export default userRouter;

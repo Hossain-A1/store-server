@@ -1,4 +1,4 @@
-import { Document } from "mongoose";
+import { Document } from 'mongoose';
 
 export type productType = {
   title: string;
@@ -7,4 +7,4 @@ export type productType = {
   images: string[];
   price: number;
   order: string[];
-} & Document
+} & Document;

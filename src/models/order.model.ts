@@ -5,7 +5,7 @@ const orderSchema = new Schema<orderType>(
   {
     products: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Order',
+      ref: 'Product',
     },
 
     user: {

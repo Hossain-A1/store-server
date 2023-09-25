@@ -29,6 +29,7 @@ const productSchema = new Schema<productType>(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Order',
+        required:true
       },
     ],
   },
