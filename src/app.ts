@@ -38,9 +38,9 @@ class App {
     });
     // bypass Routes
     this.app.use('/api/auth', authRouter);
-    this.app.use('api/users', userRouter);
-    this.app.use('api/products', productRouter);
-    this.app.use('api/orders', orderRouter);
+    this.app.use('/api/users', userRouter);
+    this.app.use('/api/products', productRouter);
+    this.app.use('/api/orders', orderRouter);
   }
   private connectToTheDatabase(): void {
     const uri = process.env.MONGO_URI as string;

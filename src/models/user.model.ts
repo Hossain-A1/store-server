@@ -33,7 +33,7 @@ const userSchema = new Schema<userType>(
     role: {
       enum: ['user', 'admin'],
       default: 'user',
-      type:String,
+      type: String,
       required: true,
     },
     order: [
@@ -56,13 +56,13 @@ userSchema.statics.register = async function (
   address,
   phoneNo
 ): Promise<userType> {
-  if (!name || !email || !password || !picUrl ) {
+  if (!name || !email || !password || !picUrl) {
     throw new Error(
       'Must fill name,email,password,picUrl,address and phoneNo '
     );
   }
 
-  const existingUser = await this.findOne({email});
+  const existingUser = await this.findOne({ email });
 
   if (existingUser) {
     throw new Error('Email already used.');
