@@ -40,7 +40,7 @@ export default class userController {
         res.status(404).json({ message: 'Unauthorized user' });
       }
 
-      if (id !== userId) {
+      if (id !== userId.toString()) {
         res.status(403).json({ message: 'Forbidden' });
       }
 
@@ -65,7 +65,7 @@ export default class userController {
         return;
       }
 
-      if (id !== userId) {
+      if (id !== userId.toString()) {
         res.status(403).json({ message: 'Forbidden' });
         return;
       }
