@@ -24,6 +24,10 @@ const productSchema = new Schema<productType>(
       type: Number,
       required: true,
     },
+    rating: {
+      type: Number,
+      required: true,
+    },
 
     order: [
       {

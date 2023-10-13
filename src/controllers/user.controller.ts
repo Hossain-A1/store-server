@@ -22,7 +22,7 @@ export default class userController {
       }
 
       await Promise.resolve().then(async () => {
-        const user = await userModel.findById(id);
+        const user = await userModel.findById(id).populate('order');
         res.status(200).json(user);
       });
     } catch (error: unknown) {

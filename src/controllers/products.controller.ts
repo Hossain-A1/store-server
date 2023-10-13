@@ -8,8 +8,10 @@ export class productController {
   // get all produts
   public async getAllProducts(req: Request, res: Response): Promise<void> {
     try {
-      const products = await productModel.find({});
-      res.status(200).json(products);
+      await Promise.resolve().then(async () => {
+        const products = await productModel.find({});
+        res.status(200).json(products);
+      });
     } catch (error) {
       await handleError(error, res);
     }
@@ -21,26 +23,32 @@ export class productController {
       if (!mongoose.Types.ObjectId.isValid(id)) {
         res.status(404).json({ message: 'Products not found' });
       }
-      const product = await productModel.findById(id);
-      res.status(200).json(product);
+      await Promise.resolve().then(async () => {
+        const product = await productModel.findById(id);
+        res.status(200).json(product);
+      });
     } catch (error) {
       await handleError(error, res);
     }
   }
 
-  // post a produt
+  // create a produt
   public async createAProduct(req: Request, res: Response): Promise<void> {
     try {
-      const { title, description, category, images, price } = req.body;
+      await Promise.resolve().then(async () => {
+        const { title, description, category, images, price, rating } =
+          req.body;
 
-      const product = await productModel.create({
-        title,
-        description,
-        category,
-        images,
-        price,
+        const product = await productModel.create({
+          title,
+          description,
+          category,
+          images,
+          price,
+          rating,
+        });
+        res.status(200).json(product);
       });
-      res.status(200).json(product);
     } catch (error) {
       await handleError(error, res);
     }
@@ -53,20 +61,22 @@ export class productController {
       if (!mongoose.Types.ObjectId.isValid(id)) {
         res.status(404).json({ message: 'Products not found' });
       }
-      const { title, description, category, images, price } = req.body;
+      await Promise.resolve().then(async () => {
+        const { title, description, category, images, price } = req.body;
 
-      const product = await productModel.findByIdAndUpdate(
-        id,
-        {
-          title,
-          description,
-          category,
-          images,
-          price,
-        },
-        { new: true }
-      );
-      res.status(200).json(product);
+        const product = await productModel.findByIdAndUpdate(
+          id,
+          {
+            title,
+            description,
+            category,
+            images,
+            price,
+          },
+          { new: true }
+        );
+        res.status(200).json(product);
+      });
     } catch (error) {
       await handleError(error, res);
     }
@@ -80,8 +90,10 @@ export class productController {
         res.status(404).json({ message: 'Products not found' });
       }
 
-      const product = await productModel.findByIdAndUpdate(id);
-      res.status(200).json(product);
+      await Promise.resolve().then(async () => {
+        const product = await productModel.findByIdAndDelete(id);
+        res.status(200).json(product);
+      });
     } catch (error) {
       await handleError(error, res);
     }
