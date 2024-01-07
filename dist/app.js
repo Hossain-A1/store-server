@@ -16,6 +16,7 @@ const user_route_1 = __importDefault(require("./routes/user.route"));
 const product_route_1 = __importDefault(require("./routes/product.route"));
 const order_route_1 = __importDefault(require("./routes/order.route"));
 const auth_route_1 = __importDefault(require("./routes/auth.route"));
+const checkout_route_1 = __importDefault(require("./routes/checkout.route"));
 class App {
     constructor() {
         this.app = (0, express_1.default)();
@@ -41,6 +42,7 @@ class App {
         this.app.use('/api/users', user_route_1.default);
         this.app.use('/api/products', product_route_1.default);
         this.app.use('/api/orders', order_route_1.default);
+        this.app.use('/api', checkout_route_1.default);
     }
     connectToTheDatabase() {
         const uri = process.env.MONGO_URI;

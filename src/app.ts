@@ -11,7 +11,7 @@ import userRouter from './routes/user.route';
 import productRouter from './routes/product.route';
 import orderRouter from './routes/order.route';
 import authRouter from './routes/auth.route';
-
+import checkoutRouter from './routes/checkout.route';
 class App {
   private app: Application;
 
@@ -41,6 +41,7 @@ class App {
     this.app.use('/api/users', userRouter);
     this.app.use('/api/products', productRouter);
     this.app.use('/api/orders', orderRouter);
+    this.app.use('/api', checkoutRouter);
   }
   private connectToTheDatabase(): void {
     const uri = process.env.MONGO_URI as string;
