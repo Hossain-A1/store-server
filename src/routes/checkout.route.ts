@@ -6,7 +6,7 @@ const checkoutInstance = new StripeCheckoutController();
 const checkoutRouter: Router = express.Router();
 // checkout
 checkoutRouter.post(
-  '/create-checkout-session ',
+  '/create-checkout-session',
   checkoutInstance.createStripeCheckout
 );
 

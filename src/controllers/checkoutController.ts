@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Stripe from 'stripe';
+import { CheckoutType } from '../types/checkout.type';
 
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY as string;
 
@@ -15,8 +16,8 @@ export default class StripeCheckoutController {
   public async createStripeCheckout(req: Request, res: Response) {
     try {
       const { items } = req.body;
-      
-      const transformedItems = items.map((item: any) => ({
+
+      const transformedItems = items.map((item: CheckoutType) => ({
         quantity: item.count,
         price_data: {
           currency: 'USD',
