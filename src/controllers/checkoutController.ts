@@ -1,52 +1,45 @@
-// controllers/checkoutController.ts
-
 import { Request, Response } from 'express';
-import stripe from 'stripe';
-import { productType } from '../types/product.type';
-const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+import Stripe from 'stripe';
 
-const stripeClient = new stripe(stripeSecretKey as string);
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY as string;
 
-if (!stripeClient) {
-  console.log('Secret key not found.');
+if (!stripeSecretKey) {
+  throw new Error('STRIPE_SECRET_KEY is not defined');
 }
 
-export class stripeCheckoutController {
-  constructor() {}
-  public async createCheckoutSession(
-    req: Request,
-    res: Response
-  ): Promise<void> {
-    const items: productType[] = req.body.items;
+const stripe = new Stripe(stripeSecretKey);
 
+export default class StripeCheckoutController {
+  constructor() {}
+
+  public async createStripeCheckout(req: Request, res: Response) {
     try {
-      // Create a line item array for the session
-      const lineItems = items.map((item: productType) => ({
+      const { items } = req.body;
+      
+      const transformedItems = items.map((item: any) => ({
+        quantity: item.count,
         price_data: {
-          currency: 'usd',
+          currency: 'USD',
+          unit_amount: +(item.price * 100).toFixed(2),
           product_data: {
             name: item.title,
+            images: [item.images[0]],
           },
-          unit_amount: item.price * 100,
         },
-        quantity: item.count,
       }));
 
-      // Create a checkout session
-      const session = await stripeClient.checkout.sessions.create({
+      const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
-        line_items: lineItems,
         mode: 'payment',
-        success_url: 'http://localhost:3000/success',
-        cancel_url: 'http://localhost:3000/cancel',
+        line_items: transformedItems,
+        success_url: `${process.env.HOST}/success`,
+        cancel_url: `${process.env.HOST}`,
       });
 
-      res.json({ id: session.id });
+      res.status(200).json({ id: session.id });
     } catch (error) {
-      console.error('Error creating checkout session:', error);
-      res.status(500).send('Error creating checkout session');
+      console.error('Error in createStripeCheckout:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   }
 }
-
-export default new stripeCheckoutController();

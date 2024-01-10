@@ -1,12 +1,13 @@
 import express, { Router } from 'express';
-import { stripeCheckoutController } from '../controllers/checkoutController';
+import StripeCheckoutController from '../controllers/checkoutController';
 
-const checkoutInstance = new stripeCheckoutController();
+const checkoutInstance = new StripeCheckoutController();
+
 const checkoutRouter: Router = express.Router();
 // checkout
 checkoutRouter.post(
   '/create-checkout-session ',
-  checkoutInstance.createCheckoutSession
+  checkoutInstance.createStripeCheckout
 );
 
 export default checkoutRouter;

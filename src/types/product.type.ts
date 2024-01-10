@@ -8,5 +8,5 @@ export type productType = {
   price: number;
   order: string[];
   rating: number;
-  count:number
+  count: number;
 } & Document;
